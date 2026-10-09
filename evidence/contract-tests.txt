@@ -1,0 +1,43 @@
+﻿
+running 1 test
+test test::test_naive_vault_drain_removal_test ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+
+running 15 tests
+--- Running Model-Based Property Test (Seed: 0x5EEDC0DE12345678, Ops: 5,000) ---
+test test::test_constructor_validation ... ok
+--- K8 Math Benchmark Results ---
+Total Operations Tested: 10000
+Bucket Allowed: 1665
+Bucket Blocked: 8335
+Max Bucket Storage: 13 entries
+Invariant I3 (Rolling 23h Cap): 100% PRESERVED across 10,000 operations!
+test k8_bucket_proto::tests::test_k8_sliding_bucket_10k_random_sequence ... ok
+test test::test_insufficient_funds_reverts_with_no_state_change ... ok
+test test::test_approve_reject_purge_flows ... ok
+test test::test_propose_auto_executed_happy_path ... ok
+test test::test_propose_input_rejections ... ok
+test test::test_propose_exceed_daily_cap_enqueues_pending ... ok
+test test::test_owner_admin_functions_and_bounds ... ok
+test test::test_propose_over_per_tx_cap_enqueues_pending ... ok
+test test::test_propose_unknown_recipient_enqueues_pending ... ok
+test test::test_propose_paused_and_expired_policy ... ok
+test test::test_strict_auth_isolation ... ok
+test test::test_rolling_window_bucket_fall_off ... ok
+test test::test_queue_full_rejection ... ok
+test property_test::test_model_based_property_invariants_5000_operations has been running for over 60 seconds
+--- Model-Based Property Test Results ---
+Total Operations: 5,000
+Proposals Evaluated: 2501
+Auto-Executed: 138
+Queued Pending: 677
+Owner Approved: 84
+Owner Rejected: 8
+Purged Expired: 571
+INVARIANTS I1ΓÇôI8: 100% PRESERVED ACROSS ALL 5,000 STEPS!
+test property_test::test_model_based_property_invariants_5000_operations ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 222.22s
+

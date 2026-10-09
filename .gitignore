@@ -15,6 +15,7 @@ AgentVault-v2-Claude-Code-Handoff.md
 # Rust build artifacts
 target/
 Cargo.lock
+test_snapshots/
 
 # Node / JS dependencies and build artifacts
 node_modules/
