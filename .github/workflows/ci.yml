@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  contracts:
+    name: Contracts Tests & Verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32v1-none
+
+      - name: Install Stellar CLI
+        run: |
+          cargo install --locked stellar-cli --version 28.1.0
+
+      - name: Test Contracts
+        run: cargo test --lib
+
+      - name: Build WASM Contracts
+        run: stellar contract build

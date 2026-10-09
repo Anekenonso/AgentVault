@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "contracts/vault",
+    "contracts/naive-vault",
+]
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+panic = "abort"
+codegen-units = 1
+lto = true
+strip = "symbols"
+debug = 0
+
+[profile.release-with-logs]
+inherits = "release"
+debug-assertions = true
