@@ -49,9 +49,26 @@ Label definitions: `REAL` | `TESTNET` | `SIMULATED` | `DRY-RUN` | `READ-ONLY` | 
 
 ## 4. Contract Compiler Verification (Phase 0 Check)
 
-- **Unit Test Execution (`cargo test --lib`)**: Passed (`1 passed; 0 failed; finished in 1.05s`).
+- **Unit Test Execution (`cargo test --lib`)**: Passed (`2 passed; 0 failed; finished in 0.10s`).
   - Note: Windows GNU linker has 65,535 export symbol limit on host `cdylib` DLLs; unit tests run cleanly via `cargo test --lib` (testing rlib).
 - **WASM Build (`stellar contract build`)**: Passed.
   - Target: `wasm32v1-none`
   - `agentvault_vault.wasm`: 378 bytes optimized
   - `agentvault_naive_vault.wasm`: 378 bytes optimized
+
+---
+
+## 5. Phase 1 Discoveries & Verifications (Kill-Tests K1–K8)
+
+| Item | Verified Value | Evidence |
+|---|---|---|
+| **Constructor Init (K1)** | Atomic deploy + init via `__constructor` supported on Testnet | Contract: `CDK7HKEGHZG3WL6UTTNAD54TW6JCC56FZJIHITHBIJUY3QVNG5GY5VPG`<br>Deploy Tx: `b47f5e7304ac66c7842bb8b037e60d368e62069671adbd1a3ce0ce9fd77941d7` |
+| **SAC Asset (K2)** | Self-issued `TUSDC` deployed via SAC; missing trustline reverts with `#13` | SAC: `CB2QSS7HJJPXZMAXX4P2N26GGTO3ZVQ23MPOL4WYXOJD5BEXCEEXEJXR`<br>Mint Tx: `992a0e26c637734020934ac31acc0e30c1da716f047f32fe6271c1f030de96fc` |
+| **Circle USDC (K2b)** | Circle testnet USDC confirmed on Testnet | `USDC:GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5` |
+| **Auth Isolation (K3)** | `require_auth` blocks agent from calling owner functions | Contract: `CDNER65GOHDGFZJNESSOWHZPQACGFGGD2FIXZYZ5PGTQ4GWOIUNLHU6W`<br>Deploy Tx: `4f324232f266dd2722e868368c719043290e0625e2ef48663af2bfb22dd940a3` |
+| **Gas & Resources (K4)** | CPU: 473,706 insns; Write: 288 bytes; Fee: 17,471 stroops (~0.0017 XLM) | Measured via `rpcServer.simulateTransaction` on testnet |
+| **Event Parsing (K5)** | `getEvents` returns topics & data; `scValToNative` parses reliably | Verified on 4 emitted contract events |
+| **Schema Bounds (K6)** | 10/10 benign quotes pass; 5/5 adversarial cases rejected by Zod | Tested with decimal validation, BigInt base units, SHA-256 reason hashes |
+| **Passport Discovery (K7)** | No public testnet stamp minting API; integration omitted per plan | Confirmed via documentation & API research |
+| **Bucket Math (K8)** | Rolling 23h window with hourly buckets preserves Invariant I3 over 10k ops | Verified via test `test_k8_sliding_bucket_10k_random_sequence` |
+

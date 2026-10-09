@@ -1,0 +1,16 @@
+[package]
+name = "k3-test-contract"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = "29.0.0"
+
+[workspace]
+
+[profile.release]
+overflow-checks = true

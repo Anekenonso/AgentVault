@@ -13,6 +13,13 @@
     "fmt:contracts": "cargo fmt --check"
   },
   "devDependencies": {
+    "@stellar/stellar-sdk": "^17.2.1",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
     "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "zod": "^4.6.5"
   }
 }

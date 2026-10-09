@@ -12,6 +12,9 @@ impl VaultContract {
 }
 
 #[cfg(test)]
+pub mod k8_bucket_proto;
+
+#[cfg(test)]
 mod test {
     use super::*;
     use soroban_sdk::Env;
