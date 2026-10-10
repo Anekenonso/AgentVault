@@ -4,7 +4,15 @@ This document tracks all manual steps and real-world verifications delegated to 
 
 ---
 
-## Phase 0: Orientation & Registration (CURRENT GATE)
+## Completed Gates
+- [x] **GATE 0**: Toolchain verified, FACTS.md initialized.
+- [x] **GATE 1**: Kill-tests K1–K8 executed and recorded in `docs/KILLTESTS.md`.
+- [x] **GATE 2**: Contract TDD suite & property tests green (16/16 tests), security review complete.
+- [x] **GATE 3**: Testnet deployment live, TypeScript bindings generated & built, smoke test verified.
+
+---
+
+## Phase 4: Agent Runtime & Paid API (NEXT GATE)
 
 - [ ] **1. Check Live Deadline & Submission Form**
   - Open `https://demo.stellarpassport.xyz/hackathons/find-your-way-meridian-hackathon` in your browser.

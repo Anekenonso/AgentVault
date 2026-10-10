@@ -10,7 +10,12 @@
     "build:contracts": "stellar contract build",
     "test:contracts": "cargo test --lib",
     "lint:contracts": "cargo clippy -- -D warnings",
-    "fmt:contracts": "cargo fmt --check"
+    "fmt:contracts": "cargo fmt --check",
+    "bindings:vault": "tsx scripts/generate-bindings.ts",
+    "bindings:check": "tsx scripts/generate-bindings.ts --check",
+    "deploy:testnet": "tsx scripts/deploy.ts",
+    "smoke:testnet": "tsx scripts/smoke.ts",
+    "verify:evidence": "tsx scripts/verify-evidence.ts"
   },
   "devDependencies": {
     "@stellar/stellar-sdk": "^17.2.1",

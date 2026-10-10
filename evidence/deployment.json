@@ -1,0 +1,45 @@
+{
+  "network": "testnet",
+  "rpc_url": "https://soroban-testnet.stellar.org",
+  "network_passphrase": "Test SDF Network ; September 2015",
+  "deployed_at": "2026-10-09T22:53:37.675Z",
+  "accounts": {
+    "owner": "GCHBPLNJX6BMD6DA2DH5ZGIINHDNAWTWXKMGABT2DAGXCVGROUMPJTB2",
+    "agent": "GC34JC4UTSPZ2DBO7OSASMBFDXCVFK7S5KNGY4IBTE2DFUWERP57PMOP",
+    "issuer": "GB2XZAAA5HPZGTD2NLJ7QHIGQQI2MPG4FF6VTSNUBRWTQ7BKG6R6EX33",
+    "provider": "GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK",
+    "attacker": "GAHXKGMAG3Q3RDCFQQR4WFZ46Z7CKN7WS5VLJNPHO2BZGEFOJRQ3WVMJ"
+  },
+  "contracts": {
+    "token_sac": "CAKIENWWT4I5HER2XKHQWCEDHFYR2TL63DLYI5S37DJJQ2PSVCX6SFQE",
+    "vault": "CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA",
+    "naive_vault": "CBFANZ76QRXYHWRROG7QDSSBNTD3334HOT3ORT7X5NOUPXXMSOGDMI3T"
+  },
+  "policy": {
+    "per_tx_cap": "50000000",
+    "daily_cap": "200000000",
+    "proposal_ttl_secs": 3600,
+    "policy_expires_at": 0
+  },
+  "funding_per_vault_stroops": "500000000",
+  "funding_per_vault_tusdc": "50",
+  "transactions": {
+    "sac_deploy": "e9e111dcc62d90a56ad57cc88a624058a351a631c8acf26dc2120251445539a7",
+    "trustline_owner": "d2ccdb1247da0cbc66580b173445d8a59ffd7c7b539986ce0622e42fbcc72f67",
+    "trustline_provider": "25bba692390315dc2a09cb76527ed8c7b9201ecd78b7c3d2a8b2ad9c0fa29fe6",
+    "trustline_attacker": "bb5862d6de9585885bb8a92ee0e3c11f45ae9bda24c753525ff7539f7687e37c",
+    "mint_owner": "b83262b2b7bfdad7e1a5fc472c12468a1fd78eca51c01fe500081d846ea00c59",
+    "vault_upload": "70ff7b07958b029e64bc576426213a0123fc30f7f220737434c9c7ea2509718b",
+    "vault_deploy": "3760ec39d9be3ef6d851c18b3e55d6cc655c16ffe6fa1b315f53b1becf179e2c",
+    "vault_set_allowlist": "81401febded729547a72aff4b7247b1be366fa40387083ad73d565ed860c0101",
+    "vault_fund": "3c05b815e25d09f31c60a3f9a144c682275e7e5884934ffe3a6da28443312186",
+    "naive_vault_upload": "9860df87aff440d32c57e74ef7cd9896fe7f90534be9d94c6eb32e7b5163718f",
+    "naive_vault_deploy": "f80df404061860e928d0125f4b817e25566c7409b134e48e4cdd05a03855b9ea",
+    "naive_vault_fund": "90221608709dfb32beedfdbb2d9cb68ef4595208ea2f7450138d5ce3bbde0ebc"
+  },
+  "explorer_links": {
+    "token_sac": "https://stellar.expert/explorer/testnet/contract/CAKIENWWT4I5HER2XKHQWCEDHFYR2TL63DLYI5S37DJJQ2PSVCX6SFQE",
+    "vault": "https://stellar.expert/explorer/testnet/contract/CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA",
+    "naive_vault": "https://stellar.expert/explorer/testnet/contract/CBFANZ76QRXYHWRROG7QDSSBNTD3334HOT3ORT7X5NOUPXXMSOGDMI3T"
+  }
+}

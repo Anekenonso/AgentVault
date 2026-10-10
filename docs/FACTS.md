@@ -72,3 +72,22 @@ Label definitions: `REAL` | `TESTNET` | `SIMULATED` | `DRY-RUN` | `READ-ONLY` | 
 | **Passport Discovery (K7)** | No public testnet stamp minting API; integration omitted per plan | Confirmed via documentation & API research |
 | **Bucket Math (K8)** | Rolling 23h window with hourly buckets preserves Invariant I3 over 10k ops | Verified via test `test_k8_sliding_bucket_10k_random_sequence` |
 
+---
+
+## 6. Phase 3 Testnet Deployments & Bindings (Verified 2026-10-09)
+
+| Entity | Address / Contract ID | Transaction Hash | Explorer Link |
+|---|---|---|---|
+| **av-owner** | `GCHBPLNJX6BMD6DA2DH5ZGIINHDNAWTWXKMGABT2DAGXCVGROUMPJTB2` | Funded by Friendbot | [Explorer](https://stellar.expert/explorer/testnet/account/GCHBPLNJX6BMD6DA2DH5ZGIINHDNAWTWXKMGABT2DAGXCVGROUMPJTB2) |
+| **av-agent** | `GC34JC4UTSPZ2DBO7OSASMBFDXCVFK7S5KNGY4IBTE2DFUWERP57PMOP` | Funded by Friendbot | [Explorer](https://stellar.expert/explorer/testnet/account/GC34JC4UTSPZ2DBO7OSASMBFDXCVFK7S5KNGY4IBTE2DFUWERP57PMOP) |
+| **av-issuer** | `GB2XZAAA5HPZGTD2NLJ7QHIGQQI2MPG4FF6VTSNUBRWTQ7BKG6R6EX33` | Funded by Friendbot | [Explorer](https://stellar.expert/explorer/testnet/account/GB2XZAAA5HPZGTD2NLJ7QHIGQQI2MPG4FF6VTSNUBRWTQ7BKG6R6EX33) |
+| **av-provider** | `GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK` | Funded by Friendbot | [Explorer](https://stellar.expert/explorer/testnet/account/GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK) |
+| **av-attacker** | `GAHXKGMAG3Q3RDCFQQR4WFZ46Z7CKN7WS5VLJNPHO2BZGEFOJRQ3WVMJ` | Funded by Friendbot | [Explorer](https://stellar.expert/explorer/testnet/account/GAHXKGMAG3Q3RDCFQQR4WFZ46Z7CKN7WS5VLJNPHO2BZGEFOJRQ3WVMJ) |
+| **TUSDC SAC** | `CAKIENWWT4I5HER2XKHQWCEDHFYR2TL63DLYI5S37DJJQ2PSVCX6SFQE` | `e9e111dcc62d90a56ad57cc88a624058a351a631c8acf26dc2120251445539a7` | [Explorer](https://stellar.expert/explorer/testnet/contract/CAKIENWWT4I5HER2XKHQWCEDHFYR2TL63DLYI5S37DJJQ2PSVCX6SFQE) |
+| **AgentVault** | `CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA` | Deploy: `3760ec39d9be3ef6d851c18b3e55d6cc655c16ffe6fa1b315f53b1becf179e2c`<br>Allowlist: `81401febded729547a72aff4b7247b1be366fa40387083ad73d565ed860c0101`<br>Fund: `3c05b815e25d09f31c60a3f9a144c682275e7e5884934ffe3a6da28443312186` | [Explorer](https://stellar.expert/explorer/testnet/contract/CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA) |
+| **NaiveVault** | `CBFANZ76QRXYHWRROG7QDSSBNTD3334HOT3ORT7X5NOUPXXMSOGDMI3T` | Deploy: `f80df404061860e928d0125f4b817e25566c7409b134e48e4cdd05a03855b9ea`<br>Fund: `90221608709dfb32beedfdbb2d9cb68ef4595208ea2f7450138d5ce3bbde0ebc` | [Explorer](https://stellar.expert/explorer/testnet/contract/CBFANZ76QRXYHWRROG7QDSSBNTD3334HOT3ORT7X5NOUPXXMSOGDMI3T) |
+| **Auto-Execute Smoke** | N/A | `10fcf2ec76308afef005bc9386733cdb25545dc8e9524868cef393a3dc3384f0` | [Explorer](https://stellar.expert/explorer/testnet/tx/10fcf2ec76308afef005bc9386733cdb25545dc8e9524868cef393a3dc3384f0) |
+| **Pending Propose Smoke** | Proposal 4 | `7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004` | [Explorer](https://stellar.expert/explorer/testnet/tx/7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004) |
+| **Owner Approval Smoke** | Proposal 4 Executed | `18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817` | [Explorer](https://stellar.expert/explorer/testnet/tx/18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817) |
+| **TypeScript Bindings** | `packages/vault-client` | Generated via `stellar contract bindings typescript`, compiled via `tsc`, 0 audit vulnerabilities | Tested with `Client` interface on live Testnet |
+

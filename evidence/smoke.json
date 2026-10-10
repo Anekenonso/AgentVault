@@ -1,0 +1,39 @@
+{
+  "network": "testnet",
+  "vault_contract": "CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA",
+  "token_sac": "CAKIENWWT4I5HER2XKHQWCEDHFYR2TL63DLYI5S37DJJQ2PSVCX6SFQE",
+  "timestamp": "2026-10-09T23:05:02.037Z",
+  "flows": {
+    "auto_executed": {
+      "type": "AUTO_EXECUTE",
+      "amount_stroops": "10000000",
+      "amount_tusdc": "1.0",
+      "recipient": "GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK",
+      "memo": "smoke-auto-exec",
+      "tx_hash": "10fcf2ec76308afef005bc9386733cdb25545dc8e9524868cef393a3dc3384f0",
+      "explorer_url": "https://stellar.expert/explorer/testnet/tx/10fcf2ec76308afef005bc9386733cdb25545dc8e9524868cef393a3dc3384f0",
+      "status": "Executed"
+    },
+    "pending_approval": {
+      "type": "HUMAN_APPROVAL",
+      "amount_stroops": "60000000",
+      "amount_tusdc": "6.0",
+      "recipient": "GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK",
+      "memo": "smoke-pending",
+      "proposal_id": 4,
+      "propose_tx_hash": "7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004",
+      "propose_explorer_url": "https://stellar.expert/explorer/testnet/tx/7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004",
+      "approve_tx_hash": "18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817",
+      "approve_explorer_url": "https://stellar.expert/explorer/testnet/tx/18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817",
+      "status": "Executed"
+    }
+  },
+  "balances": {
+    "initial_vault_tusdc": "43",
+    "initial_provider_tusdc": "7",
+    "final_vault_tusdc": "36",
+    "final_provider_tusdc": "14",
+    "delta_vault_tusdc": "-7.0",
+    "delta_provider_tusdc": "+7.0"
+  }
+}
