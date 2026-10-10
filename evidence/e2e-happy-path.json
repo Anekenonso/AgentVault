@@ -1,0 +1,24 @@
+{
+  "network": "testnet",
+  "timestamp": "2026-10-10T02:49:05.790Z",
+  "label": "TESTNET",
+  "experiment": "GATE_4_E2E_HAPPY_PATH",
+  "vault_contract": "CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA",
+  "provider_pay_to": "GAVCZCIPHDPVMENME3ZUZ65V7VEVMIWOOCSLDW6LHVX4TEYRWY7IWBNK",
+  "agent_key": "GC34JC4UTSPZ2DBO7OSASMBFDXCVFK7S5KNGY4IBTE2DFUWERP57PMOP",
+  "invoice_id": "inv-a092e2ee-feee-4c71-8852-7a0b99bc00f7",
+  "reason_hash": "4da42750f1e554d49162eb581225341884416f963fe916c6a1f302b3afc3c895",
+  "price_base_units": "10000000",
+  "tx_hash": "a3b8574eec9f27e7f97e52c50529340b4654339538dce57ad5831d1730ac5a8f",
+  "explorer_url": "https://stellar.expert/explorer/testnet/tx/a3b8574eec9f27e7f97e52c50529340b4654339538dce57ad5831d1730ac5a8f",
+  "execution_status": "Executed",
+  "paid_api_response": {
+    "status": 200,
+    "data": "PREMIUM_DATA: Query \"soroban-alpha-index\" processed successfully. Authenticated on-chain via AgentVault.",
+    "invoice_id": "inv-a092e2ee-feee-4c71-8852-7a0b99bc00f7",
+    "payment_tx": "a3b8574eec9f27e7f97e52c50529340b4654339538dce57ad5831d1730ac5a8f",
+    "amount_base_units": "10000000",
+    "ledger": 5115391,
+    "timestamp": "2026-10-10T02:49:05.786Z"
+  }
+}

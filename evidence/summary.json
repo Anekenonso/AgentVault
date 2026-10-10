@@ -1,0 +1,12 @@
+{
+  "network": "testnet",
+  "timestamp": "2026-10-10T03:02:13.092Z",
+  "e1_containment_attempts": 50,
+  "e1_containment_blocked": 50,
+  "e1_attacker_loss": "0.0 TUSDC",
+  "e2_corpus_size": 35,
+  "e2_containment_rate": "82.9%",
+  "e3_naive_vault_drained": "100.0%",
+  "e3_drain_tx_hash": "6266135ba9973495b1e76bc43800f3a6030ce05d882b23e90f8507393e7fa4fd",
+  "e3_drain_explorer": "https://stellar.expert/explorer/testnet/tx/6266135ba9973495b1e76bc43800f3a6030ce05d882b23e90f8507393e7fa4fd"
+}

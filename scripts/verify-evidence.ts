@@ -86,6 +86,24 @@ async function main() {
     console.warn('⚠️  evidence/smoke.json not found (will be checked if smoke has run)!');
   }
 
+  // 3. Check e2e-happy-path.json
+  const happyPath = path.resolve('evidence', 'e2e-happy-path.json');
+  if (fs.existsSync(happyPath)) {
+    const e2e = JSON.parse(fs.readFileSync(happyPath, 'utf-8'));
+    if (e2e.tx_hash) {
+      checks.push(verifyHash('e2e-happy-path.json', 'e2e:payment_tx', e2e.tx_hash));
+    }
+  }
+
+  // 4. Check summary.json (E3 removal drain test)
+  const summaryPath = path.resolve('evidence', 'summary.json');
+  if (fs.existsSync(summaryPath)) {
+    const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf-8'));
+    if (summary.e3_drain_tx_hash) {
+      checks.push(verifyHash('summary.json', 'redteam:e3_drain', summary.e3_drain_tx_hash));
+    }
+  }
+
   if (checks.length === 0) {
     console.error('❌ No transaction hashes found to verify!');
     process.exit(1);
