@@ -40,3 +40,9 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Marketing, submission kits & private owner action checklists
+docs/DEMO_SCRIPT.md
+docs/HUMAN_TODO.md
+docs/SUBMISSION_KIT.md
+
