@@ -15,6 +15,7 @@ import { z } from 'zod';
 import { StrKey } from '@stellar/stellar-sdk';
 import { createHash } from 'crypto';
 import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 
 // ============================================================================
 // STRICT ZOD VALIDATION SCHEMA
@@ -211,20 +212,76 @@ const ADVERSARIAL_CASES = [
 async function runTest() {
   console.log('=== K6: LLM STRUCTURED OUTPUT & ZOD VALIDATION KILL-TEST ===\n');
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  const isLive = Boolean(apiKey);
-  const runMode = isLive ? 'REAL (Live Anthropic API)' : 'SIMULATED (Deterministic Mock Pipeline)';
+  const litellmKey = process.env.LITELLM_API_KEY;
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  const isLive = Boolean(litellmKey || anthropicKey);
+  const runMode = litellmKey
+    ? 'REAL (Live LiteLLM API)'
+    : anthropicKey
+    ? 'REAL (Live Anthropic API)'
+    : 'SIMULATED (Deterministic Mock Pipeline)';
 
   console.log(`Execution Mode: [${runMode}]\n`);
 
   let validCount = 0;
   let totalBenign = BENIGN_QUOTES.length;
 
-  if (isLive) {
-    const client = new Anthropic({ apiKey });
+  if (litellmKey) {
+    const baseURL = process.env.LITELLM_BASE_URL || 'https://litellm.vision.aivar.app/v1';
+    const model = process.env.LITELLM_MODEL || 'claude-sonnet-4.6';
+    const client = new OpenAI({ apiKey: litellmKey, baseURL });
+
+    console.log(`Querying LiteLLM endpoint: ${baseURL} | Model: ${model}...`);
+
+    for (let i = 0; i < totalBenign; i++) {
+      const item = BENIGN_QUOTES[i];
+      const prompt = `Task: ${item.task}\nReceived 402 Quote: ${JSON.stringify(item.quote)}\nPropose the payment using propose_payment.`;
+
+      const response = await client.chat.completions.create({
+        model,
+        messages: [{ role: 'user', content: prompt }],
+        tools: [
+          {
+            type: 'function',
+            function: {
+              name: 'propose_payment',
+              description: 'Propose a payment to an external API provider',
+              parameters: {
+                type: 'object',
+                properties: {
+                  to: { type: 'string', description: 'Stellar G or C address' },
+                  amount: { type: 'string', description: 'Payment amount as decimal string' },
+                  memo: { type: 'string', description: 'Payment memo (max 64 bytes)' },
+                  invoice_id: { type: 'string', description: 'Invoice ID' },
+                },
+                required: ['to', 'amount', 'memo', 'invoice_id'],
+              },
+            },
+          },
+        ],
+        tool_choice: { type: 'function', function: { name: 'propose_payment' } },
+      });
+
+      const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+      if (!toolCall || toolCall.type !== 'function') {
+        console.log(`❌ Case ${i + 1}: No tool call returned`);
+        continue;
+      }
+
+      const input = JSON.parse(toolCall.function.arguments);
+      const parsed = parseAndValidateProposal(input);
+      if (parsed.success && parsed.data) {
+        validCount++;
+        console.log(`✅ Case ${i + 1} PASSED: ${parsed.data.memo} | Amount: ${parsed.data.amountBaseUnits} stroops`);
+      } else {
+        console.log(`❌ Case ${i + 1} REJECTED BY ZOD: ${parsed.error}`);
+      }
+    }
+  } else if (anthropicKey) {
+    const client = new Anthropic({ apiKey: anthropicKey });
     const model = process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-20241022';
 
-    console.log(`Querying model: ${model} with forced tool call...`);
+    console.log(`Querying Anthropic model: ${model} with forced tool call...`);
 
     const tools: Anthropic.Tool[] = [
       {

@@ -251,4 +251,28 @@ describe('Deterministic Mock Mode & Runtime Execution', () => {
     expect(result.mode).toBe('SIMULATED');
     expect(result.rejectionReason).toContain('REJECTED_BY_SCHEMA');
   });
+
+  it('15. Configures LiteLLM provider with default endpoint and model resolution', () => {
+    const agent = new AgentRuntime({
+      vaultContractId: dummyVault,
+      agentSecret: dummyAgentKey.secret(),
+      litellmApiKey: 'sk-litellm-test-key',
+    });
+
+    expect(agent.getProvider()).toBe('litellm');
+    expect(agent.getModelId()).toBe('claude-sonnet-4.6');
+  });
+
+  it('16. Configures LiteLLM with custom model (e.g., nova-2-lite or claude-opus-4.6)', () => {
+    const agent = new AgentRuntime({
+      vaultContractId: dummyVault,
+      agentSecret: dummyAgentKey.secret(),
+      litellmApiKey: 'sk-litellm-test-key',
+      modelId: 'nova-2-lite',
+    });
+
+    expect(agent.getProvider()).toBe('litellm');
+    expect(agent.getModelId()).toBe('nova-2-lite');
+  });
 });
+
