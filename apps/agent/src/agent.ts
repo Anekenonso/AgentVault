@@ -10,6 +10,8 @@
  */
 
 import * as crypto from 'crypto';
+import * as fs from 'fs';
+import * as path from 'path';
 import { execSync } from 'child_process';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
@@ -52,6 +54,33 @@ export interface AgentRunResult {
   rejectionReason?: string;
 }
 
+function loadEnvLocalIfAvailable() {
+  if (process.env.LITELLM_API_KEY || process.env.ANTHROPIC_API_KEY) return;
+  try {
+    const candidates = [
+      path.resolve(process.cwd(), '.env.local'),
+      path.resolve(process.cwd(), '../../.env.local'),
+    ];
+    for (const envPath of candidates) {
+      if (fs.existsSync(envPath)) {
+        const content = fs.readFileSync(envPath, 'utf-8');
+        for (const line of content.split('\n')) {
+          const trimmed = line.trim();
+          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+            const idx = trimmed.indexOf('=');
+            const key = trimmed.slice(0, idx).trim();
+            const val = trimmed.slice(idx + 1).trim();
+            if (!process.env[key]) {
+              process.env[key] = val;
+            }
+          }
+        }
+        break;
+      }
+    }
+  } catch {}
+}
+
 export class AgentRuntime {
   private rpcServer: rpc.Server;
   private networkPassphrase: string;
@@ -64,6 +93,8 @@ export class AgentRuntime {
   private provider: 'litellm' | 'anthropic' | 'mock';
 
   constructor(private config: AgentConfig) {
+    loadEnvLocalIfAvailable();
+
     this.vaultContractId = config.vaultContractId;
     this.rpcUrl = config.rpcUrl || 'https://soroban-testnet.stellar.org';
     this.networkPassphrase = config.networkPassphrase || Networks.TESTNET;
