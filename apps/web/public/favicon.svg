@@ -1,0 +1,52 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="av-shield" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#1f4d3a" />
+      <stop offset="50%" stopColor="#163828" />
+      <stop offset="100%" stopColor="#1c2621" />
+    </linearGradient>
+    <linearGradient id="av-core" x1="20" y1="20" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#faf6ef" />
+      <stop offset="50%" stopColor="#dfeae3" />
+      <stop offset="100%" stopColor="#5b7f6a" />
+    </linearGradient>
+    <linearGradient id="av-accent" x1="16" y1="8" x2="48" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#5b7f6a" stopOpacity="0.4" />
+      <stop offset="100%" stopColor="#1f4d3a" stopOpacity="0.1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base: ExceptionLineage Warm Ivory -->
+  <rect width="64" height="64" rx="14" fill="#faf6ef" />
+  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" stroke="#e6dccb" strokeWidth="1" />
+
+  <!-- Outer Sovereign Hexagonal Vault Crest -->
+  <path
+    d="M32 8L50 18V36C50 46 42 53.5 32 56C22 53.5 14 46 14 36V18L32 8Z"
+    fill="url(#av-shield)"
+    stroke="#163828"
+    strokeWidth="2.5"
+    strokeLinejoin="round"
+  />
+
+  <!-- Inner Facets -->
+  <path
+    d="M32 13L45 20.5V34C45 42 38.5 48 32 50C25.5 48 19 42 19 34V20.5L32 13Z"
+    fill="url(#av-accent)"
+    stroke="#5b7f6a"
+    strokeWidth="1"
+  />
+
+  <!-- Autonomous Core: Interlocking Diamond -->
+  <path
+    d="M32 21L39.5 28.5L32 36L24.5 28.5L32 21Z"
+    fill="url(#av-core)"
+  />
+
+  <!-- Keyway Center -->
+  <circle cx="32" cy="28.5" r="3" fill="#1f4d3a" stroke="#faf6ef" strokeWidth="1.2" />
+
+  <!-- Invariant Latch: Terracotta Accent -->
+  <line x1="32" y1="36" x2="32" y2="44" stroke="#c2512f" strokeWidth="2" strokeLinecap="round" />
+  <circle cx="32" cy="44" r="1.8" fill="#c2512f" />
+</svg>

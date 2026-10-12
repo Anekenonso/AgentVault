@@ -1,34 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #07090e;
-  --foreground: #f1f5f9;
+  --background: #faf6ef;
+  --foreground: #1c2621;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-sans);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* ExceptionLineage Warm Ivory Canvas with Subtle Ambient Depth */
+  background-image: 
+    radial-gradient(ellipse 90% 45% at 50% -10%, rgba(31, 77, 58, 0.04), transparent 70%),
+    radial-gradient(ellipse 60% 35% at 85% 15%, rgba(194, 81, 47, 0.025), transparent 60%),
+    radial-gradient(rgba(28, 38, 33, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  background-attachment: fixed;
+  color-scheme: light;
 }
 
-/* Custom scrollbars */
+/* Modern Web Guidance: Typographic Polish */
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+  letter-spacing: -0.025em;
+  color: #1c2621;
+}
+
+p, .pretty-text {
+  text-wrap: pretty;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Institutional Ivory Card Surfaces & Sand Hairline Borders */
+.glass-panel {
+  background: #fffdf9;
+  border: 1px solid #e6dccb;
+  box-shadow: 0 4px 20px -2px rgba(28, 38, 33, 0.04);
+}
+
+.glass-panel-elevated {
+  background: #fffdf9;
+  border: 1px solid #cfc2ab;
+  box-shadow: 0 10px 30px -4px rgba(28, 38, 33, 0.07);
+}
+
+.glass-card-interactive {
+  background: #fffdf9;
+  border: 1px solid #e6dccb;
+  box-shadow: 0 2px 10px -2px rgba(28, 38, 33, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-interactive:hover {
+  background: #faf6ef;
+  border-color: #1f4d3a;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(31, 77, 58, 0.09);
+}
+
+/* Segmented Control Pill Active Fill */
+.tab-pill-active {
+  background: #1f4d3a;
+  color: #faf6ef;
+  box-shadow: 0 2px 10px -2px rgba(31, 77, 58, 0.25);
+}
+
+/* Neon Glow Utilities */
+.glow-cyan {
+  box-shadow: 0 0 25px -4px rgba(6, 182, 212, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.35);
+}
+
+.glow-rose {
+  box-shadow: 0 0 25px -4px rgba(244, 63, 94, 0.35);
+}
+
+.glow-amber {
+  box-shadow: 0 0 25px -4px rgba(245, 158, 11, 0.35);
+}
+
+/* Modern Gradient Text */
+.text-gradient-white {
+  background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #E0F2FE 0%, #38BDF8 50%, #0284C7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #D1FAE5 0%, #34D399 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-rose {
+  background: linear-gradient(135deg, #FFE4E6 0%, #FB7185 50%, #E11D48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Native Web Scrollbars */
+* {
+  scrollbar-color: rgba(28, 38, 33, 0.2) transparent;
+  scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: rgba(28, 38, 33, 0.2);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: rgba(28, 38, 33, 0.35);
+}
+
+/* Suppress Next.js floating dev button & tool indicators */
+nextjs-portal,
+[data-nextjs-portal],
+[data-nextjs-toast],
+[data-nextjs-dev-tools],
+#next-dev-tools,
+[data-nextjs-dialog-overlay] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }

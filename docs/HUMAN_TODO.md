@@ -30,29 +30,19 @@
 
 ---
 
-## 🖥️ Phase 5: Web Dashboard Verification (ACTIVE GATE 5)
+## 🖥️ Phase 5: Web Dashboard Verification (GATE 5 PASSED ✅)
 
-Now that the Next.js Web Dashboard is built and compiled (`apps/web`):
-- [ ] **Start Local Dashboard**
-  - Run `npm run dev:web` (starts on `http://localhost:3000`).
-- [ ] **Connect Freighter Wallet**
-  - Click **Connect Freighter** in the header.
-  - Approve connection prompt in the Freighter popup.
-  - Confirm that your G-address appears and network shows `STELLAR TESTNET`.
-- [ ] **Test Emergency Kill-Switch**
-  - Click **EMERGENCY KILL-SWITCH**.
-  - Review the decoded summary in Freighter and sign transaction.
-  - Verify that the status chip flips to `KILL-SWITCH ENGAGED (PAUSED)`.
-  - Click **Unpause Vault** and sign to restore operational state.
-- [ ] **Test Manual Approval Flow**
-  - In the **Pending Human Sign-Off Queue**, click **Approve** on a pending proposal.
-  - Verify the decoded confirmation modal displays:
-    - Target Recipient
-    - Amount in TUSDC
-    - Proposal ID
-    - Memo text
-    - Network (Stellar Testnet)
-  - Click **Sign with Freighter** and verify transaction completes successfully on-chain.
+Verified live on Stellar Testnet by Human Owner with Freighter:
+- [x] **Start Local Dashboard**
+  - Next.js 15 dev server running on `http://localhost:3000`.
+- [x] **Connect Freighter Wallet**
+  - Verified on Stellar Testnet with connected owner account `GCHB...JTB2`.
+- [x] **Test Emergency Kill-Switch**
+  - Verified pause/unpause state toggle signed via Freighter.
+- [x] **Test Manual Approval Flow**
+  - Verified over-cap proposal approval executed on-chain (Proposal #49 transitioned to Executed).
+- [x] **Test Manual Rejection Flow**
+  - Verified adversarial prompt-injection proposal rejected on-chain (Proposal #54 transitioned to Rejected).
 
 ---
 

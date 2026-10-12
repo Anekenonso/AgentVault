@@ -89,22 +89,22 @@ export function WalletConnectModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 relative text-slate-200">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-[#fffdf9] border border-[#e6dccb] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 relative text-[#1c2621]">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div className="flex items-center justify-between border-b border-[#e6dccb] pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-sky-500/10 border border-sky-500/20 rounded-xl text-sky-400">
+            <div className="p-2 bg-[#dfeae3] border border-[#1f4d3a]/25 rounded-xl text-[#1f4d3a]">
               <Wallet className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Connect Stellar Wallet</h2>
-              <p className="text-xs text-slate-400">Stellar Soroban Testnet</p>
+              <h2 className="text-base font-bold text-[#1c2621]">Connect Stellar Wallet</h2>
+              <p className="text-xs text-[#7d877f]">Stellar Soroban Testnet</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors"
+            className="text-[#7d877f] hover:text-[#1c2621] p-1 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -112,9 +112,9 @@ export function WalletConnectModal({
 
         {/* Error Banner */}
         {error && (
-          <div className="bg-rose-500/10 border border-rose-500/30 rounded-xl p-3.5 text-xs text-rose-300 space-y-2">
+          <div className="bg-[#f8e4db] border border-[#c2512f]/30 rounded-xl p-3.5 text-xs text-[#9d3f22] space-y-2">
             <div className="flex items-start gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
+              <AlertCircle className="w-4 h-4 shrink-0 text-[#c2512f] mt-0.5" />
               <div className="whitespace-pre-line leading-relaxed">{error}</div>
             </div>
           </div>
@@ -122,25 +122,25 @@ export function WalletConnectModal({
 
         {/* Extension Detection Status */}
         {hasFreighter === false && (
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 text-xs space-y-3">
-            <div className="flex items-center gap-2 text-amber-400 font-semibold">
+          <div className="bg-[#fef3c7] border border-[#b45309]/30 rounded-xl p-4 text-xs space-y-3">
+            <div className="flex items-center gap-2 text-[#92400e] font-semibold">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>Freighter Extension Not Detected</span>
             </div>
-            <p className="text-slate-300">
+            <p className="text-[#4a564f]">
               Freighter is the official non-custodial browser wallet for Stellar and Soroban dApps.
             </p>
             <a
               href="https://www.freighter.app"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-medium transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 bg-[#1f4d3a] hover:bg-[#163828] text-[#faf6ef] rounded-xl font-medium transition-colors"
             >
               <Download className="w-4 h-4" />
               <span>Install Freighter (freighter.app)</span>
               <ExternalLink className="w-3.5 h-3.5 ml-1" />
             </a>
-            <p className="text-[11px] text-slate-400 italic text-center">
+            <p className="text-[11px] text-[#7d877f] italic text-center">
               After installing, reload the page to detect the extension.
             </p>
           </div>
@@ -151,7 +151,7 @@ export function WalletConnectModal({
           <button
             onClick={handleConnectFreighter}
             disabled={connecting}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-semibold text-sm transition-all shadow-lg shadow-sky-950/40 disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#1f4d3a] hover:bg-[#163828] text-[#faf6ef] rounded-xl font-semibold text-sm transition-all shadow-md shadow-[#1f4d3a]/20 disabled:opacity-50 cursor-pointer"
           >
             {connecting ? (
               <>
@@ -167,25 +167,25 @@ export function WalletConnectModal({
           </button>
 
           {/* Testnet Requirement Hint */}
-          <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-400 space-y-1 font-mono">
+          <div className="bg-[#faf6ef] border border-[#e6dccb] rounded-xl p-3 text-xs text-[#4a564f] space-y-1 font-mono">
             <div className="flex justify-between items-center text-[11px]">
-              <span className="text-slate-500">Required Network:</span>
-              <span className="text-emerald-400 font-semibold">Stellar Testnet</span>
+              <span className="text-[#7d877f]">Required Network:</span>
+              <span className="text-[#163828] font-semibold">Stellar Testnet</span>
             </div>
             <div className="flex justify-between items-center text-[11px]">
-              <span className="text-slate-500">Vault Owner:</span>
-              <span className="text-slate-300">{shortAddress(vaultOwnerAddress)}</span>
+              <span className="text-[#7d877f]">Vault Owner:</span>
+              <span className="text-[#1c2621]">{shortAddress(vaultOwnerAddress)}</span>
             </div>
           </div>
         </div>
 
         {/* Dev / Local Mode Fallbacks */}
-        <div className="pt-2 border-t border-slate-800/80 space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="pt-2 border-t border-[#e6dccb] space-y-3">
+          <div className="flex items-center justify-between text-xs text-[#7d877f]">
             <span>Developer / Local Testing Mode:</span>
             <button
               onClick={() => setShowManualInput(!showManualInput)}
-              className="text-sky-400 hover:text-sky-300 underline"
+              className="text-[#1f4d3a] hover:text-[#163828] underline cursor-pointer"
             >
               {showManualInput ? 'Hide Manual' : 'Manual Address'}
             </button>
@@ -193,13 +193,13 @@ export function WalletConnectModal({
 
           <button
             onClick={handleDevOwnerConnect}
-            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-mono text-slate-300 transition-colors"
+            className="w-full flex items-center justify-between px-3.5 py-2.5 bg-[#faf6ef] hover:bg-[#fffdf9] border border-[#e6dccb] rounded-xl text-xs font-mono text-[#1c2621] transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <Key className="w-3.5 h-3.5 text-amber-400" />
+              <Key className="w-3.5 h-3.5 text-[#b45309]" />
               <span>Connect as av-owner ({shortAddress(vaultOwnerAddress)})</span>
             </div>
-            <span className="text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
+            <span className="text-[10px] text-[#92400e] bg-[#fef3c7] px-2 py-0.5 rounded font-sans font-semibold">
               Testnet Owner
             </span>
           </button>
@@ -211,11 +211,11 @@ export function WalletConnectModal({
                 placeholder="G..."
                 value={customAddress}
                 onChange={(e) => setCustomAddress(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-sky-500"
+                className="w-full bg-[#fffdf9] border border-[#e6dccb] rounded-xl px-3 py-2 text-xs font-mono text-[#1c2621] placeholder-[#7d877f] focus:outline-none focus:border-[#1f4d3a]"
               />
               <button
                 type="submit"
-                className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-xl text-slate-200 transition-colors"
+                className="w-full py-2 bg-[#1f4d3a] hover:bg-[#163828] text-xs font-medium rounded-xl text-[#faf6ef] transition-colors cursor-pointer"
               >
                 Set Active Address
               </button>

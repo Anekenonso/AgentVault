@@ -1,11 +1,23 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Link from 'next/link';
-import { Shield, ExternalLink, Activity } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
+import { BrandLogo } from '../components/BrandLogo';
+import { ArrowUpRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'AgentVault v2 — Autonomous AI Agent Vault on Soroban',
-  description: 'Hard on-chain caps, allowlisted payees, proposal queue, and kill-switch containment for AI agents.',
+  title: 'AgentVault v2 — The Sovereign Policy Vault for Autonomous AI Agents',
+  description:
+    'AI handles ambiguity. Deterministic smart contracts handle authority. Decoupling agent intelligence from spending keys with non-bypassable on-chain invariants on Stellar Soroban.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=4' },
+      { url: '/favicon-32x32.png?v=4', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png?v=4', sizes: '16x16', type: 'image/png' },
+      { url: '/icon.svg?v=4', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico?v=4',
+    apple: '/apple-touch-icon.png?v=4',
+  },
 };
 
 export default function RootLayout({
@@ -15,68 +27,52 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#07090e] text-slate-100 min-h-screen flex flex-col antialiased">
-        <header className="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="flex items-center space-x-3 group">
-                <div className="p-2 bg-sky-500/10 border border-sky-500/30 rounded-lg group-hover:border-sky-400 transition-colors">
-                  <Shield className="w-5 h-5 text-sky-400" />
-                </div>
-                <div>
-                  <span className="font-bold tracking-tight text-white text-lg">AgentVault</span>
-                  <span className="text-xs font-mono text-sky-400 ml-1.5 px-1.5 py-0.5 rounded bg-sky-950/60 border border-sky-800/50">v2</span>
-                </div>
-              </Link>
-              <nav className="hidden md:flex space-x-1">
-                <Link
-                  href="/"
-                  className="px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-md transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/proof"
-                  className="px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-md transition-colors flex items-center gap-1.5"
-                >
-                  <Activity className="w-4 h-4 text-emerald-400" />
-                  Proof & Red-Team
-                </Link>
-              </nav>
-            </div>
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico?v=4" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=4" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4" />
+        <link rel="icon" type="image/svg+xml" href="/icon.svg?v=4" />
+        <link rel="alternate icon" href="/favicon.ico?v=4" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
+      </head>
+      <body className="min-h-screen flex flex-col antialiased bg-[#faf6ef] text-[#1c2621] selection:bg-[#1f4d3a]/15 selection:text-[#1f4d3a]">
+        {/* Floating Ivory Frosted Header */}
+        <Navbar />
 
-            <div className="flex items-center space-x-3">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                <span className="w-1.5 h-1.5 mr-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
-                STELLAR TESTNET
-              </span>
-            </div>
-          </div>
-        </header>
-
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Main Content Area */}
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           {children}
         </main>
 
-        <footer className="border-t border-slate-900 bg-slate-950/40 py-6 text-center text-xs text-slate-500">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>AgentVault v2 — Autonomous Agent Containment & Policy Engine on Soroban</p>
-            <div className="flex items-center space-x-4">
+        {/* Global Sovereign Brand Footer */}
+        <footer className="border-t border-[#e6dccb] bg-[#fffdf9] py-10 text-center text-xs text-[#7d877f]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-left">
+              <BrandLogo size={28} showText={true} textSize="sm" />
+              <span className="text-[#cfc2ab] hidden sm:inline">&bull;</span>
+              <p className="text-xs text-[#4a564f] font-sans pretty-text">
+                Autonomous AI Agent Containment & Sovereign Policy Engine on Stellar Soroban
+              </p>
+            </div>
+
+            <div className="flex items-center space-x-6 font-mono text-[11px]">
               <a
                 href="https://stellar.expert/explorer/testnet/contract/CCZQDUIODGUVEWKTHRIUUXOSIOLYFDSGKDQQFBVEJ2BAXBKWPQ7P2AYA"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-slate-400 transition-colors flex items-center gap-1"
+                className="hover:text-[#1f4d3a] transition-colors flex items-center gap-1.5 text-[#4a564f]"
               >
-                Vault Contract <ExternalLink className="w-3 h-3" />
+                <span>Vault Contract</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#1f4d3a]" />
               </a>
               <a
                 href="https://stellar.expert/explorer/testnet/contract/CBFANZ76QRXYHWRROG7QDSSBNTD3334HOT3ORT7X5NOUPXXMSOGDMI3T"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-slate-400 transition-colors flex items-center gap-1 text-red-400/80"
+                className="hover:text-[#c2512f] transition-colors flex items-center gap-1.5 text-[#9d3f22]"
               >
-                Naive Baseline <ExternalLink className="w-3 h-3" />
+                <span>Naive Baseline</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#c2512f]" />
               </a>
             </div>
           </div>

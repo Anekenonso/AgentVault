@@ -129,7 +129,7 @@ export const DEFAULT_FALLBACK_PROPOSALS: Proposal[] = [
     amountFormatted: '0.15',
     reason_hash: '9e73ecfa892556ea0b38c0379ea2ffef47d34ec3b5e4ff57d6da0592966144e5',
     memo: 'Provider API Call (402 paid)',
-    status: 'Approved',
+    status: 'Executed',
     created_at: 1760050417,
     auto: false,
   },
@@ -140,7 +140,7 @@ export const DEFAULT_FALLBACK_PROPOSALS: Proposal[] = [
     amountFormatted: '0.10',
     reason_hash: '59a84a282f6e7d6cfcfc045b8429ef995c6b653457e8fa134d1bc94541ecfcf1',
     memo: 'E2E Happy Path Payment',
-    status: 'Approved',
+    status: 'Executed',
     created_at: 1760050200,
     auto: true,
   },
@@ -214,10 +214,45 @@ export async function fetchProposals(limit = 20): Promise<Proposal[]> {
       const amount = BigInt(p.amount || 0);
 
       let status: ProposalStatus = 'Pending';
-      if (typeof p.status === 'string') {
-        status = p.status as ProposalStatus;
+      if (typeof p.status === 'number') {
+        switch (p.status) {
+          case 0:
+            status = 'Pending';
+            break;
+          case 1:
+            status = 'Executed';
+            break;
+          case 2:
+            status = 'Rejected';
+            break;
+          case 3:
+            status = 'Expired';
+            break;
+          default:
+            status = 'Pending';
+        }
+      } else if (typeof p.status === 'string') {
+        const s = p.status.toLowerCase();
+        if (s === 'executed' || s === 'approved') {
+          status = 'Executed';
+        } else if (s === 'rejected') {
+          status = 'Rejected';
+        } else if (s === 'expired') {
+          status = 'Expired';
+        } else {
+          status = 'Pending';
+        }
       } else if (p.status && typeof p.status === 'object') {
-        status = Object.keys(p.status)[0] as ProposalStatus;
+        const key = Object.keys(p.status)[0]?.toLowerCase();
+        if (key === 'executed' || key === 'approved') {
+          status = 'Executed';
+        } else if (key === 'rejected') {
+          status = 'Rejected';
+        } else if (key === 'expired') {
+          status = 'Expired';
+        } else {
+          status = 'Pending';
+        }
       }
 
       const memo = p.memo instanceof Uint8Array

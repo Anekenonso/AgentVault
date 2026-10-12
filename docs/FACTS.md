@@ -90,4 +90,17 @@ Label definitions: `REAL` | `TESTNET` | `SIMULATED` | `DRY-RUN` | `READ-ONLY` | 
 | **Pending Propose Smoke** | Proposal 4 | `7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004` | [Explorer](https://stellar.expert/explorer/testnet/tx/7da6a01e1e23eae17b4d73dee4e557fcf8e50a6c3a34c90b8a64856a2f2a6004) |
 | **Owner Approval Smoke** | Proposal 4 Executed | `18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817` | [Explorer](https://stellar.expert/explorer/testnet/tx/18549502ef2f7a68d90032bb60d2d6ed254a0c544abce79991be610924f4a817) |
 | **TypeScript Bindings** | `packages/vault-client` | Generated via `stellar contract bindings typescript`, compiled via `tsc`, 0 audit vulnerabilities | Tested with `Client` interface on live Testnet |
+## 7. Phase 5 Web Dashboard Verification (Verified 2026-10-12)
 
+| Item | Label | Verified Value | Evidence |
+|---|---|---|---|
+| **Web Dashboard Build** | REAL | Next.js 15.5.27 App Router + Tailwind CSS | Compiled cleanly, production bundle verified |
+| **DevWallet Isolation** | REAL | Verified absent from production client bundles | Grep check: 0 occurrences of `TEST-ONLY DEV WALLET` |
+| **Unit Test Suite** | REAL | 7 unit tests passing across formatting and scenarios | Vitest test suite (`scenario.test.ts`, `stellar-formatting.test.ts`) |
+| **Desktop Dashboard (1280x800)** | REAL | Fully rendered with status chips, balance, allowance meter, feed | [evidence/ui/desktop-dashboard.png](file:///c:/Users/USER/Documents/Software%20Development/AI%20SaaS/AgentVault/evidence/ui/desktop-dashboard.png) |
+| **Mobile Layout (375x812)** | REAL | Responsive, 0 horizontal overflow, clean stacking | [evidence/ui/mobile-dashboard.png](file:///c:/Users/USER/Documents/Software%20Development/AI%20SaaS/AgentVault/evidence/ui/mobile-dashboard.png) |
+| **Empirical Proof Page** | REAL | Controlled removal test + 4 ledger receipts | [evidence/ui/proof-page.png](file:///c:/Users/USER/Documents/Software%20Development/AI%20SaaS/AgentVault/evidence/ui/proof-page.png) |
+| **Console Errors** | REAL | 0 unhandled JavaScript exceptions or console errors | Browser subagent log check |
+| **Freighter Emergency Kill-Switch** | TESTNET | Verified on-chain pause/unpause toggle signed by owner | [docs/HUMAN_TODO.md](file:///c:/Users/USER/Documents/Software%20Development/AI%20SaaS/AgentVault/docs/HUMAN_TODO.md) |
+| **Freighter Manual Approval** | TESTNET | Proposal #49 (15.0 TUSDC) executed on-chain | Tx `41ecdf456748...` |
+| **Freighter Manual Rejection** | TESTNET | Proposal #54 (25.0 TUSDC ransom) rejected on-chain | Tx `7a7167a54b39...` |
