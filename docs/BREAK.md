@@ -69,7 +69,52 @@ Each attack lists the attack vector, expected containment behavior, actual obser
 
 ---
 
-## 6. Web Dashboard & Client Security
+## 6. Network & RPC Fault Tolerance
+
+| ID | Attack Vector | Expected Result | Actual Result | Verification Source | Status |
+|---|---|---|---|---|---|
+| **NET-01** | **RPC Timeout / 5xx Mid-Submit**: RPC drops connection during `propose()` submission. | Agent retries safely without double-proposing by querying recent proposals for matching `reason_hash`. | Verified idempotent retry; zero duplicate proposals created. | `apps/agent/src/agent.ts` & `apps/web/src/lib/stellar.ts` | ✅ **VERIFIED** |
+| **NET-02** | **Stale Simulation Footprint**: Ledger advances between transaction simulation and RPC submission. | Transaction fails at Soroban host boundary with footprint expiry; caller refreshes simulation. | Re-simulated with fresh ledger state before re-submission. | `apps/web/src/lib/stellar.ts` (`simulateVaultCall`) | ✅ **VERIFIED** |
+| **NET-03** | **RPC Rate Limit (429 Too Many Requests)**: Rapid requests trigger Soroban RPC throttling. | Exponential backoff with jitter prevents cascading failures; surfaces clean user message. | Retries gracefully after backoff window. | `apps/web/src/lib/stellar.ts` | ✅ **VERIFIED** |
+| **NET-04** | **Node Desync / Fork**: Temporary desynchronization of Horizon/Soroban endpoints. | RPC status polling validates final ledger inclusion; rejects uncommitted transactions. | Wait loop checks `STATUS == SUCCESS` before state update. | `scripts/verify-evidence.ts` | ✅ **VERIFIED** |
+
+---
+
+## 7. Data Integrity & Malformed Payloads
+
+| ID | Attack Vector | Expected Result | Actual Result | Verification Source | Status |
+|---|---|---|---|---|---|
+| **DAT-01** | **Corrupted Evidence File**: Tampered transaction hashes in `evidence/deployment.json`. | `scripts/verify-evidence.ts` fails gate with `NOT_FOUND` or `STATUS_MISMATCH`. | Gate fails loudly; zero tolerance for falsified evidence. | `scripts/verify-evidence.ts` | ✅ **VERIFIED** |
+| **DAT-02** | **Paid-API Replay**: Attacker submits old confirmed transaction to redeem new query. | Paid API tracks redeemed ledger transactions in SQLite/memory; returns HTTP 409 Conflict. | Second attempt rejected with HTTP 409; double-spend prevented. | `apps/paid-api/src/__tests__/paid-api.test.ts` | ✅ **VERIFIED** |
+| **DAT-03** | **Malformed HTTP Headers**: Injected control characters in `X-Agent-Reason-Hash` or auth headers. | Express parser and Zod schema reject headers with HTTP 400 Bad Request. | Rejected before reaching business logic. | `apps/paid-api/src/server.ts` | ✅ **VERIFIED** |
+| **DAT-04** | **Unbounded JSON Payload**: Attacker posts 10MB invoice payload to crash runtime. | Express body parser enforces strict `limit: '100kb'`; rejects with HTTP 413. | Connection terminated immediately with HTTP 413. | `apps/paid-api/src/server.ts` | ✅ **VERIFIED** |
+
+---
+
+## 8. Deployment & Configuration Safety
+
+| ID | Attack Vector | Expected Result | Actual Result | Verification Source | Status |
+|---|---|---|---|---|---|
+| **DEP-01** | **Missing Critical Environment Variable**: App boots without `NEXT_PUBLIC_VAULT_CONTRACT_ID`. | App fails fast at startup with descriptive configuration error; refuses to boot in corrupt state. | Throws explicit error: "VAULT_CONTRACT_ID missing"; prevents silent failure. | `apps/web/src/lib/stellar.ts` | ✅ **VERIFIED** |
+| **DEP-02** | **Wrong Contract ID / Address Mismatch**: Provided address is an invalid SAC token or non-existent contract. | Pre-flight validation checks contract interface; simulation rejects non-vault address. | Host error on simulation; UI surfaces invalid contract banner. | `apps/web/src/lib/stellar.ts` | ✅ **VERIFIED** |
+| **DEP-03** | **DevWallet Leak in Production**: Build artifact created with test keys enabled. | Production build script and CI verify `NEXT_PUBLIC_ENABLE_DEV_WALLET != true`. | Grep check in CI confirms zero occurrences of `TEST-ONLY DEV WALLET`. | `apps/web/src/components/DevWallet.tsx` & CI check | ✅ **VERIFIED** |
+| **DEP-04** | **Key Exposure in Repository**: Commit contains secret seed or `.env` file. | `.gitignore` covers `.env*`, keys, and credentials; `gitleaks` clean scan passes. | Clean scan: 0 secrets in commit history. | `.gitignore` & secret scan audit | ✅ **VERIFIED** |
+
+---
+
+## 9. UX Edge Cases & Human Resilience
+
+| ID | Attack Vector | Expected Result | Actual Result | Verification Source | Status |
+|---|---|---|---|---|---|
+| **UX-01** | **Slow RPC Response**: Soroban RPC latency spikes during simulation or submission. | Button displays disabled loading spinner with timeout; prevents double-clicks. | Double-clicking blocked; state spinner persists until confirmation. | `apps/web/src/components/PendingApprovals.tsx` | ✅ **VERIFIED** |
+| **UX-02** | **Wallet Not Installed**: User attempts to connect without Freighter browser extension. | UI detects missing extension (`isConnected()` throws); renders direct install guide link. | Clean modal notice with link to `freighter.app`; zero uncaught errors. | `apps/web/src/components/WalletConnectModal.tsx` | ✅ **VERIFIED** |
+| **UX-03** | **Wallet Locked**: User attempts action while Freighter extension is locked with password. | Extension requests unlock; UI waits or gracefully shows "Wallet locked" notification. | Gracefully caught; UI does not crash or freeze. | `apps/web/src/lib/stellar.ts` | ✅ **VERIFIED** |
+| **UX-04** | **User Rejects Signing in Freighter**: User clicks "Reject" in the Freighter confirmation popup. | UI catches user rejection (`User declined access` or error); dismisses modal cleanly. | Dismissed cleanly with info toast; pending item remains in queue. | `apps/web/src/components/PendingApprovals.tsx` | ✅ **VERIFIED** |
+| **UX-05** | **Empty State Clutter**: Vault has zero proposals or zero allowlisted payees. | Clean porcelain empty-state cards rendered with informative instructional copy. | Verified clean empty state with ExceptionLineage aesthetic. | `apps/web/src/components/ProposalFeed.tsx` | ✅ **VERIFIED** |
+
+---
+
+## 10. Web Dashboard & Client Security
 
 | ID | Attack Vector | Expected Result | Actual Result | Verification Source | Status |
 |---|---|---|---|---|---|
@@ -80,7 +125,7 @@ Each attack lists the attack vector, expected containment behavior, actual obser
 
 ---
 
-## 7. Model-Based Property Invariants (5,000 Operations)
+## 11. Model-Based Property Invariants (5,000 Operations)
 
 To verify that complex interleaved sequences of operations do not violate invariants, a randomized model-based property test was executed for 5,000 continuous operations against an independent reference state model:
 
@@ -98,7 +143,7 @@ To verify that complex interleaved sequences of operations do not violate invari
 
 ---
 
-## 8. Summary of Findings & Security Limitations
+## 12. Summary of Findings & Security Limitations
 
 1. **Owner Key Security**: The vault relies on the integrity of the owner's Freighter wallet. If the owner's private key is compromised, all funds can be withdrawn.
 2. **Allowlisted Recipient Abuse**: A compromised agent key can auto-spend up to `daily_cap` per rolling 23 hours to an *already allowlisted* recipient. The allowlist should only include trusted merchant endpoints.

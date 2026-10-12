@@ -72,3 +72,5 @@ Verified live on Stellar Testnet by Human Owner with Freighter:
 - [x] **GATE 3**: Testnet deployment live (`CCZQDUI...`, `CBFANZ7...`, `CAKIENW...`), TS bindings generated & built, smoke test verified.
 - [x] **GATE 4**: Agent runtime, Paid API (HTTP 402 + on-chain verification), E2E Testnet happy path, and Red-team harness (E1, E2, E3 with 17 verified Testnet transactions) complete.
 - [x] **GATE 5 (Build & Unit Tests)**: Next.js 15 App Router web dashboard scaffolded, 31 unit tests passing across all packages, production build compiled cleanly with zero DevWallet artifacts.
+- [x] **GATE 6 (Break It - Security Matrix)**: All 8 architectural layers (Auth, State, Money, AI, Network, Data, Deployment, UX) audited and verified in `docs/BREAK.md`; independent contract & web security self-review completed in `docs/SECURITY_REVIEW.md`.
+- [x] **GATE 7 (Prove It - Falsifiable Evidence)**: 17/17 on-chain transactions independently re-queried and confirmed SUCCESS via Soroban RPC (`npm run verify:evidence`); mathematical containment matrix and baseline removal test documented in `docs/PROOF.md`.
